@@ -1,10 +1,3 @@
-//
-//  TheMetHighlightsTests.swift
-//  TheMetHighlightsTests
-//
-//  Created by Abizer Nasir on 06/11/2024.
-//
-
 import Testing
 @testable import TheMetHighlights
 
