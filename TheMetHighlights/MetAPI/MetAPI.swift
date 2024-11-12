@@ -1,5 +1,6 @@
 import Dependencies
 import Foundation
+import UIKit
 
 // The URLSession to be used for all calls
 let session: URLSession = {
@@ -17,6 +18,8 @@ let session: URLSession = {
 struct MetAPI: Sendable {
     var departments: @Sendable () async -> [Department]
     var highlightedExhibits: @Sendable (Department.ID) async throws -> [Exhibit]
+    var thumbnailImage: @Sendable (String) async -> UIImage?
+
 }
 
 // Live Values
@@ -61,6 +64,26 @@ extension MetAPI: DependencyKey {
                         return !string.isEmpty
                     }
             }
+        },
+        thumbnailImage: { string in
+            guard let encodedString = string.addingPercentEncoding()
+            else {
+                return nil
+            }
+            guard let url = URL(string: encodedString),
+                  let (imageData, _) = try? await session.data(from: url),
+                  let image = UIImage(data: imageData)
+            else {
+                return nil
+            }
+
+            let resizeTask = Task.detached(priority: .userInitiated) {
+                generateThumbnail(for:image, size: CGSize(width: 52, height: 52))
+            }
+
+            let resizedImage = await resizeTask.value
+
+            return resizedImage
         }
     )
 }
@@ -92,6 +115,9 @@ extension MetAPI {
                 Exhibit.mock1,
                 .mock2,
             ]
+        },
+        thumbnailImage: { _ in
+            UIImage(named: "Thumbnail")
         }
     )
 }
@@ -128,5 +154,14 @@ extension URL {
 
         components.queryItems = queryItems
         return components.url!
+    }
+}
+
+extension String {
+    func addingPercentEncoding() -> String? {
+        let unreserved = ":-._~/?"
+        let allowed = NSMutableCharacterSet.alphanumeric()
+        allowed.addCharacters(in: unreserved)
+        return addingPercentEncoding(withAllowedCharacters: allowed as CharacterSet)
     }
 }
