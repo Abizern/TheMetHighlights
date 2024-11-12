@@ -11,7 +11,7 @@ struct ExhibitRowModelTests {
 
         #expect(model.id == Exhibit.mock1.id)
         #expect(model.exhibit == .mock1)
-        #expect(model.thumbnail == nil)
+        #expect(model.fetchedImage == .none)
 
     }
 
@@ -19,11 +19,14 @@ struct ExhibitRowModelTests {
     func testAddThumbnailImage() async {
         let model = ExhibitRowModel(.mock1)
         let thumbnail = Fixtures.thumbnail
-        model.addThumbnail(thumbnail)
+        model.setFetchedImage(.success(thumbnail))
 
         #expect(model.id == Exhibit.mock1.id)
         #expect(model.exhibit == .mock1)
-        #expect(model.thumbnail == thumbnail)
-
+        var successfullFetch = false
+        if case FetchedImageView.FetchedImage.success(_) = model.fetchedImage {
+            successfullFetch = true
+        }
+        #expect(successfullFetch)
     }
 }

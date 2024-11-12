@@ -30,12 +30,19 @@ final class ExhibitsListModel: ObservableObject {
         }
         for model in exhibitRowModels {
             let identifier = model.id
-            guard let imagePath = model.exhibit.smallImage,
-                  let thumbnail = await metAPI.thumbnailImage(imagePath)
+
+            guard let rowModel = exhibitRowModels[id: identifier],
+                  let imagePath = model.exhibit.smallImage
             else {
                 continue
             }
-            exhibitRowModels[id: identifier]?.addThumbnail(thumbnail)
+            rowModel.setFetchedImage(.loading)
+            guard let thumbnail = await metAPI.thumbnailImage(imagePath)
+            else {
+                rowModel.setFetchedImage(.none)
+                continue
+            }
+            rowModel.setFetchedImage(.success(thumbnail))
         }
     }
 }

@@ -6,16 +6,15 @@ import UIKit
 @Observable
 final class ExhibitRowModel: Identifiable {
     let id: Exhibit.ID
-
-    private(set) var thumbnail: UIImage?
     var exhibit: Exhibit
+    private(set) var fetchedImage: FetchedImageView.FetchedImage = .none
 
     init(_ exhibit: Exhibit) {
         self.exhibit = exhibit
         id = exhibit.id
     }
 
-    func addThumbnail(_ image: UIImage) {
-        thumbnail = image
+    func setFetchedImage(_ fetchedImage: FetchedImageView.FetchedImage) {
+        self.fetchedImage = fetchedImage
     }
 }

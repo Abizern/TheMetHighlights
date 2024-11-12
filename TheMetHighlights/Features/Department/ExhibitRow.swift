@@ -9,18 +9,10 @@ struct ExhibitRow: View {
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
-                if model.thumbnail != nil {
-                    Image(uiImage: model.thumbnail!)
-                        .frame(width: 52, height: 52)
-                        .cornerRadius(5)
-                        .padding()
-                } else {
-                    Rectangle()
-                        .fill(.tertiary)
-                        .frame(width: 52, height: 52)
-                        .cornerRadius(5)
-                        .padding()
-                }
+                FetchedImageView(model.fetchedImage, isThumbnail: true)
+                    .frame(width: 52, height: 52)
+                    .cornerRadius(5)
+                    .padding()
                 VStack(alignment: .leading) {
                     Text(model.exhibit.title)
                         .font(.title2)

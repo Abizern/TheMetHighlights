@@ -20,6 +20,17 @@ struct ExhibitListModelTests {
         await model.fetchExhibits()
 
         #expect(model.exhibitRowModels.count == 2)
-        #expect(model.exhibitRowModels.compactMap(\.thumbnail).count == 2)
+
+        let filteredFetchedImages = model
+            .exhibitRowModels
+            .map(\.fetchedImage)
+            .filter {
+                if case FetchedImageView.FetchedImage.success(_) = $0 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        #expect(filteredFetchedImages.count == 2)
     }
 }
