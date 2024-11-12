@@ -19,7 +19,7 @@ struct MetAPI: Sendable {
 }
 
 // Live Values
-extension MetAPI {
+extension MetAPI: DependencyKey {
     static let liveValue = MetAPI(
         departments: {
             do {

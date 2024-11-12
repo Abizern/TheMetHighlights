@@ -26,16 +26,6 @@
 		ADE723672CDB7E370049971F /* TheMetHighlightsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMetHighlightsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		ADA92CD62CE22CA800F09170 /* Exceptions for "TheMetHighlightsTests" folder in "Compile Sources" phase from "TheMetHighlightsTests" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = ADE723632CDB7E370049971F /* Sources */;
-			membershipExceptions = (
-				Fixtures/Department.json,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		ADE723592CDB7E340049971F /* TheMetHighlights */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -44,9 +34,6 @@
 		};
 		ADE7236A2CDB7E370049971F /* TheMetHighlightsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				ADA92CD62CE22CA800F09170 /* Exceptions for "TheMetHighlightsTests" folder in "Compile Sources" phase from "TheMetHighlightsTests" target */,
-			);
 			path = TheMetHighlightsTests;
 			sourceTree = "<group>";
 		};
