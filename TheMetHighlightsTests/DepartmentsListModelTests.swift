@@ -2,19 +2,23 @@ import Testing
 
 @testable import TheMetHighlights
 
-@Test("Initial state")
-func testInitialState () {
-    let model = DepartmentsListModel()
+@Suite("DepartmentListModel Tests")
+struct DepartmentsListModelTests {
+    @Test("Initial state")
+    func testInitialState () {
+        let model = DepartmentsListModel()
 
-    #expect(model.departments.isEmpty)
-    #expect(model.navigationTitle == "Departments")
+        #expect(model.departments.isEmpty)
+        #expect(model.navigationTitle == "Departments")
+    }
+
+    @Test("Departments are fetched")
+    func testFetchDepartments () async {
+        let model = DepartmentsListModel()
+
+        await model.fetchDepartments()
+
+        #expect(!model.departments.isEmpty)
+    }
 }
 
-@Test("Departments are fetched")
-func testFetchDepartments () async {
-    let model = DepartmentsListModel()
-    
-    await model.fetchDepartments()
-
-    #expect(!model.departments.isEmpty)
-}

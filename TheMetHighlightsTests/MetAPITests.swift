@@ -3,7 +3,7 @@ import Testing
 
 @testable import TheMetHighlights
 
-@Suite("Endpooints used by the MetAPI")
+@Suite("MetAPI Endpoint Tests")
 struct MetAPITests {
     @Test("Departments endpoint")
     func testDepartmentEndpoint() {
@@ -26,5 +26,4 @@ struct MetAPITests {
 
         #expect(URL.exhibitInt(exhibitId).absoluteString == exhibitEndpoint)
     }
-
 }

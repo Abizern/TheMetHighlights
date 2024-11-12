@@ -1,7 +1,7 @@
 import Dependencies
 import SwiftUI
 
-struct DepartmentView: View {
+struct ExhibitsListView: View {
     var model: ExhibitsListModel
 
     var body: some View {
@@ -21,6 +21,6 @@ struct DepartmentView: View {
 
 #Preview {
     NavigationStack{
-        DepartmentView(model: ExhibitsListModel(.mock))
+        ExhibitsListView(model: ExhibitsListModel(.mock))
     }
 }
