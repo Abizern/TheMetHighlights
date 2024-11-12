@@ -13,6 +13,7 @@ final class ExhibitViewModel {
     var department: String
     var medium: String
 
+
     @ObservationIgnored
     lazy var urlStringForImage: String? = {
         return [exhibit.image, exhibit.smallImage]
@@ -20,7 +21,13 @@ final class ExhibitViewModel {
             .first
     }()
 
-
+    func detailImage() -> UIImage? {
+        if case let .success(image) = image {
+            return image
+        } else {
+            return nil
+        }
+    }
 
     @ObservationIgnored
     @Dependency(\.metAPI) var metAPI
@@ -35,6 +42,8 @@ final class ExhibitViewModel {
     }
 
     func fetchImage() async {
+        guard detailImage() == nil else { return }
+
         guard let urlString = urlStringForImage else { return }
         self.image = .loading
 

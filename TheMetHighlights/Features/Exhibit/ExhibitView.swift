@@ -10,8 +10,13 @@ struct ExhibitView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack {
-                FetchedImageView(model.image, isThumbnail: false)
-                    .padding()
+                NavigationLink {
+                    ImageDetailView(image: model.detailImage())
+                } label: {
+                    FetchedImageView(model.image, isThumbnail: false)
+                }
+                .padding()
+
                 Text(model.exhibit.title)
                     .font(.largeTitle)
                     .padding()
