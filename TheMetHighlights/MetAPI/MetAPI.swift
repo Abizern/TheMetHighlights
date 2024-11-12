@@ -16,6 +16,7 @@ let session: URLSession = {
 
 struct MetAPI: Sendable {
     var departments: @Sendable () async -> [Department]
+    var highlightedExhibits: @Sendable (Department.ID) async throws -> [Exhibit]
 }
 
 // Live Values
@@ -27,6 +28,38 @@ extension MetAPI: DependencyKey {
                 return try JSONDecoder().decode(DepartmentsResponse.self, from: data).departments
             } catch {
                 return []
+            }
+        },
+        highlightedExhibits: { departmentId in
+            let departmentURL = URL.highlightedExhibits(departmentId)
+            let (data, _) = try await session.data(from: departmentURL)
+            let exhibitIDs = try JSONDecoder()
+                .decode(HighlighedExhibitsIdResponse.self, from: data)
+                .objectIDs
+
+            return await withTaskGroup(of: (Int, Exhibit?).self) { group -> [Exhibit] in
+                for (index, exId) in exhibitIDs.enumerated() {
+                    group.addTask {
+                        do {
+                            let (data, _) = try await session.data(from: .exhibitInt(exId))
+                            let exhibit = try JSONDecoder().decode(Exhibit.self, from: data)
+                            return (index, exhibit)
+                        } catch {
+                            return (index, nil)
+                        }
+                    }
+                }
+
+                let enumeratedExhibits = await group.reduce(into: [(Int, Exhibit?)]()) { partialResult, value in
+                    partialResult.append(value)
+                }
+
+                return enumeratedExhibits.sorted { $0.0 < $1.0 }
+                    .compactMap { $0.1 }
+                    .filter { exhibit in
+                        guard let string = exhibit.smallImage else { return false }
+                        return !string.isEmpty
+                    }
             }
         }
     )
@@ -53,7 +86,14 @@ extension MetAPI {
                 Department(id: 15, name: "The Robert Lehman Collection"),
                 Department(id: 16, name: "The Libraries")
             ]
-        })
+        },
+        highlightedExhibits: { _ in
+            [
+                Exhibit.mock1,
+                .mock2,
+            ]
+        }
+    )
 }
 
 extension MetAPI: TestDependencyKey {
@@ -71,5 +111,22 @@ extension DependencyValues {
 extension URL {
     static var departments: Self {
         URL(string: "https://collectionapi.metmuseum.org/public/collection/v1/departments")!
+    }
+
+    static func exhibitInt(_ id: Int) -> Self {
+        URL(string: "https://collectionapi.metmuseum.org/public/collection/v1/objects/\(id)")!
+    }
+
+    static func highlightedExhibits(_ id: Department.ID) -> Self {
+        var components = URLComponents(string: "https://collectionapi.metmuseum.org/public/collection/v1/search")!
+        let queryItems = [
+            URLQueryItem(name: "isHighlight", value: "true"),
+            URLQueryItem(name: "departmentId", value: id.rawValue.description),
+            URLQueryItem(name: "q", value: ""),
+            URLQueryItem(name: "hasImages", value: "true")
+        ]
+
+        components.queryItems = queryItems
+        return components.url!
     }
 }

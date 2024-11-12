@@ -14,6 +14,13 @@ enum Fixtures {
         return try! Data(contentsOf: url)
     }
 
+    static var exhibit: Data {
+        loadJson("Exhibit")
+    }
+
+    static var exhibits: Data {
+        loadJson("Exhibits")
+    }
     static var department: Data {
         loadJson("Department")
     }

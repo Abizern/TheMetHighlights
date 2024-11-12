@@ -10,7 +10,7 @@ func testInitialState () {
     #expect(model.navigationTitle == "Departments")
 }
 
-@Test("Departs are fetched")
+@Test("Departments are fetched")
 func testFetchDepartments () async {
     let model = DepartmentsListModel()
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ADA92CC32CE2261900F09170 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = ADA92CC22CE2261900F09170 /* Dependencies */; };
 		ADA92CC62CE2262700F09170 /* Tagged in Frameworks */ = {isa = PBXBuildFile; productRef = ADA92CC52CE2262700F09170 /* Tagged */; };
+		ADA92CFF2CE238B500F09170 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = ADA92CFE2CE238B500F09170 /* IdentifiedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA92CFF2CE238B500F09170 /* IdentifiedCollections in Frameworks */,
 				ADA92CC62CE2262700F09170 /* Tagged in Frameworks */,
 				ADA92CC32CE2261900F09170 /* Dependencies in Frameworks */,
 			);
@@ -99,6 +101,7 @@
 			packageProductDependencies = (
 				ADA92CC22CE2261900F09170 /* Dependencies */,
 				ADA92CC52CE2262700F09170 /* Tagged */,
+				ADA92CFE2CE238B500F09170 /* IdentifiedCollections */,
 			);
 			productName = TheMetHighlights;
 			productReference = ADE723572CDB7E340049971F /* TheMetHighlights.app */;
@@ -158,6 +161,7 @@
 			packageReferences = (
 				ADA92CC12CE2261900F09170 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 				ADA92CC42CE2262700F09170 /* XCRemoteSwiftPackageReference "swift-tagged" */,
+				ADA92CFD2CE238B500F09170 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADE723582CDB7E340049971F /* Products */;
@@ -485,6 +489,14 @@
 				minimumVersion = 0.10.0;
 			};
 		};
+		ADA92CFD2CE238B500F09170 /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-identified-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -497,6 +509,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ADA92CC42CE2262700F09170 /* XCRemoteSwiftPackageReference "swift-tagged" */;
 			productName = Tagged;
+		};
+		ADA92CFE2CE238B500F09170 /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADA92CFD2CE238B500F09170 /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
+			productName = IdentifiedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
