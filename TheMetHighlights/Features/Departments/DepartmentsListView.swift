@@ -4,10 +4,13 @@ struct DepartmentsListView: View {
     var model = DepartmentsListModel()
 
     var body: some View {
-        List {
-            ForEach(model.departments) { department in
+        List(model.departments) { department in
+            NavigationLink {
+                ExhibitsListView(model: ExhibitsListModel(department))
+            } label: {
                 DepartmentRow(department)
             }
+
         }
         .navigationTitle(model.navigationTitle)
         .task {

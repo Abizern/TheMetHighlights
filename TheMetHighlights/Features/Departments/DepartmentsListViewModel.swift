@@ -10,9 +10,7 @@ final class DepartmentsListModel {
 
     let navigationTitle = "Departments"
 
-    init(
-        departments: [Department] = []
-    ) {
+    init(departments: [Department] = []) {
         self.departments = departments
     }
 
