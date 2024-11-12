@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ADA92CC32CE2261900F09170 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = ADA92CC22CE2261900F09170 /* Dependencies */; };
+		ADA92CC62CE2262700F09170 /* Tagged in Frameworks */ = {isa = PBXBuildFile; productRef = ADA92CC52CE2262700F09170 /* Tagged */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		ADE723682CDB7E370049971F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,6 +26,16 @@
 		ADE723672CDB7E370049971F /* TheMetHighlightsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMetHighlightsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		ADA92CD62CE22CA800F09170 /* Exceptions for "TheMetHighlightsTests" folder in "Compile Sources" phase from "TheMetHighlightsTests" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = ADE723632CDB7E370049971F /* Sources */;
+			membershipExceptions = (
+				Fixtures/Department.json,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		ADE723592CDB7E340049971F /* TheMetHighlights */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -29,6 +44,9 @@
 		};
 		ADE7236A2CDB7E370049971F /* TheMetHighlightsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ADA92CD62CE22CA800F09170 /* Exceptions for "TheMetHighlightsTests" folder in "Compile Sources" phase from "TheMetHighlightsTests" target */,
+			);
 			path = TheMetHighlightsTests;
 			sourceTree = "<group>";
 		};
@@ -39,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA92CC62CE2262700F09170 /* Tagged in Frameworks */,
+				ADA92CC32CE2261900F09170 /* Dependencies in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +110,8 @@
 			);
 			name = TheMetHighlights;
 			packageProductDependencies = (
+				ADA92CC22CE2261900F09170 /* Dependencies */,
+				ADA92CC52CE2262700F09170 /* Tagged */,
 			);
 			productName = TheMetHighlights;
 			productReference = ADE723572CDB7E340049971F /* TheMetHighlights.app */;
@@ -146,6 +168,10 @@
 			);
 			mainGroup = ADE7234E2CDB7E340049971F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ADA92CC12CE2261900F09170 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				ADA92CC42CE2262700F09170 /* XCRemoteSwiftPackageReference "swift-tagged" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ADE723582CDB7E340049971F /* Products */;
 			projectDirPath = "";
@@ -454,6 +480,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ADA92CC12CE2261900F09170 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
+		ADA92CC42CE2262700F09170 /* XCRemoteSwiftPackageReference "swift-tagged" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-tagged.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ADA92CC22CE2261900F09170 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADA92CC12CE2261900F09170 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		ADA92CC52CE2262700F09170 /* Tagged */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADA92CC42CE2262700F09170 /* XCRemoteSwiftPackageReference "swift-tagged" */;
+			productName = Tagged;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ADE7234F2CDB7E340049971F /* Project object */;
 }
