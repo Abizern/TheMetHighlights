@@ -2,6 +2,7 @@ import Testing
 
 @testable import TheMetHighlights
 
+@MainActor
 @Suite("DepartmentListModel Tests")
 struct DepartmentsListModelTests {
     @Test("Initial state")

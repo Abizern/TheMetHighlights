@@ -2,6 +2,7 @@ import Testing
 
 @testable import TheMetHighlights
 
+@MainActor
 @Suite("ExhibitRowModel Tests")
 struct ExhibitRowModelTests {
     @Test("Initial state")
@@ -15,7 +16,7 @@ struct ExhibitRowModelTests {
     }
 
     @Test("Add a thumbnail image")
-    func testAddThumbnailImage() {
+    func testAddThumbnailImage() async {
         let model = ExhibitRowModel(.mock1)
         let thumbnail = Fixtures.thumbnail
         model.addThumbnail(thumbnail)

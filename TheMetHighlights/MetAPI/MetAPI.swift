@@ -17,6 +17,7 @@ let session: URLSession = {
 
 struct MetAPI: Sendable {
     var departments: @Sendable () async -> [Department]
+    var fetchImage: @Sendable (String) async -> UIImage?
     var highlightedExhibits: @Sendable (Department.ID) async throws -> [Exhibit]
     var thumbnailImage: @Sendable (String) async -> UIImage?
 
@@ -32,6 +33,20 @@ extension MetAPI: DependencyKey {
             } catch {
                 return []
             }
+        },
+        fetchImage: { string in
+            guard let encodedString = string.addingPercentEncoding()
+            else {
+                return nil
+            }
+
+            guard let url = URL(string: encodedString),
+                  let (imageData, _) = try? await session.data(from: url)
+            else {
+                return nil
+            }
+
+            return UIImage(data: imageData)
         },
         highlightedExhibits: { departmentId in
             let departmentURL = URL.highlightedExhibits(departmentId)
@@ -90,7 +105,7 @@ extension MetAPI: DependencyKey {
 
 // Previews and Default Tests
 extension MetAPI {
-    static var preview = MetAPI(
+    static let preview = MetAPI(
         departments: {
             [
                 Department(id: 1, name: "American Decorative Arts"),
@@ -109,6 +124,9 @@ extension MetAPI {
                 Department(id: 15, name: "The Robert Lehman Collection"),
                 Department(id: 16, name: "The Libraries")
             ]
+        },
+        fetchImage: { _ in
+            UIImage(named: "Image")
         },
         highlightedExhibits: { _ in
             [

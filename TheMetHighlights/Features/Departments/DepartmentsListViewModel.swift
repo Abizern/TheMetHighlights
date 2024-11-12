@@ -2,6 +2,7 @@ import Dependencies
 import Foundation
 
 @Observable
+@MainActor
 final class DepartmentsListModel {
      private(set) var departments: [Department]
 

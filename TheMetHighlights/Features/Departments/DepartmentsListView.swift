@@ -10,7 +10,6 @@ struct DepartmentsListView: View {
             } label: {
                 DepartmentRow(department)
             }
-
         }
         .navigationTitle(model.navigationTitle)
         .task {

@@ -4,6 +4,7 @@ import IdentifiedCollections
 import UIKit
 
 @Observable
+@MainActor
 final class ExhibitsListModel: ObservableObject {
     private(set) var exhibitRowModels = IdentifiedArrayOf<ExhibitRowModel>()
 

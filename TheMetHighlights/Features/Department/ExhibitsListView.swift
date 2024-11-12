@@ -5,8 +5,10 @@ struct ExhibitsListView: View {
     var model: ExhibitsListModel
 
     var body: some View {
-        List {
-            ForEach(model.exhibitRowModels) { rowModel in
+        List(model.exhibitRowModels) { rowModel in
+            NavigationLink {
+                ExhibitView(ExhibitViewModel(rowModel.exhibit))
+            } label: {
                 ExhibitRow(rowModel)
             }
         }
@@ -15,7 +17,6 @@ struct ExhibitsListView: View {
         .task {
             await model.fetchExhibits()
         }
-        
     }
 }
 

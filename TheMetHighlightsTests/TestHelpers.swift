@@ -20,6 +20,10 @@ enum Fixtures {
         loadJson("Exhibits")
     }
 
+    static var image: UIImage {
+        loadImage("Image")
+    }
+
     static var thumbnail: UIImage {
         loadImage("Thumbnail")
     }
